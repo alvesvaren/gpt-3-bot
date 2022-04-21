@@ -34,7 +34,7 @@ client.on("messageCreate", async message => {
 
     console.log(message.author.tag + ": " + message.cleanContent);
 
-    if (message.channel.id === "966409383074492487") {
+    if (message.channel.id === process.env.CHANNEL_ID) {
         await message.channel.sendTyping();
         const prompt = (await recurseReplies(message)).join("\n");
         const completion = await openAi.createCompletion("text-davinci-002", {
