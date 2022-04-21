@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { Client, Intents, Message, ThreadChannel } from "discord.js";
 import { ChannelTypes } from "discord.js/typings/enums";
 import { Configuration, OpenAIApi } from "openai";
@@ -9,7 +10,7 @@ const client = new Client({
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_KEY,
 });
-const openai = new OpenAIApi(configuration);
+const openAi = new OpenAIApi(configuration);
 
 client.on("ready", () => {
     console.log(`Logged in as ${client.user?.tag}!`);
@@ -36,7 +37,7 @@ client.on("messageCreate", async message => {
     if (message.channel.id === "966409383074492487") {
         await message.channel.sendTyping();
         const prompt = (await recurseReplies(message)).join("\n");
-        const completion = await openai.createCompletion("text-davinci-002", {
+        const completion = await openAi.createCompletion("text-davinci-002", {
             prompt,
             max_tokens: 256,
             temperature: 0.4,

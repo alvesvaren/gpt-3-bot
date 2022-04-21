@@ -11,6 +11,7 @@
     "bufferutil": "^4.0.6",
     "discord": "^0.8.2",
     "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
     "erlpack": "discord/erlpack",
     "nodemon": "^2.0.15",
     "openai": "^2.0.5",
@@ -22,8 +23,9 @@
   },
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "build": "tsc",
+    "build:tsc": "tsc",
+    "build:uglify": "uglifyjs -mco dist/index.js -- dist/index.js",
     "start": "node dist/index.js",
-    "minify": "uglifyjs -mco dist/index.js -- dist/index.js"
+    "build": "yarn build:tsc && yarn build:uglify"
   }
 }
